@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width", initial-scale=1.0">
+  <title>Document</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <form class id="weatherForm">
+    <input type= "text" class="cityinput" placeholder="Enter City">
+    <button type="submit">Get Weather</button>
+  </form>
+
+  <div class="card" style="display: flex">
+    <div class="Card">
+      <div class="ferenheit">
+        <hi class="cityDisplay">Seattle</hi>
+        <p class="tempDisplay">57° F</p>
+        <p class="humunityDisplay">Humunity: 43%</p>
+        <p class="descDisplay">Clear Skies</p>
+        <p class=weatherEmojis">Partly Cloudy</p>
+        <p class="errrorDisplay">Emerald City</p>
+      </div>
+      </div>
+
+        <div id="WeatherContainer">
+            <div id="iconIcon">
+              <div class="ferenheit">
+                <p class="rain id= day1"></p>
+                <img id="icon" src="https://openweathermap.org/img/wn/04n.png" alt<p class="maxvalue id=" day1Max"></p>
+              </div>
+              <div id="iconIcon">
+                <div class="ferenheit">
+                  <p class="rain id= day1"></p>
+                  <img id="icon" src="https://openweathermap.org/img/wn/04n.png" alt="weather icon">
+                  <p class="minvalue id=" 5day1Min"></p>
+                  <p class="maxvalue id=" 5day1Max"></p>
+                </div>
+              </div>
+
+    <script>>
+      const weatherForm =document.querySelector(".weatherForm");
+const cityInput = document.querySelector(".cityInput");
+const card = document.querySelector(".card");
+const apiKey = "9afza5vpuemopj82ffu65gt9sh9v8n9s";
+
+weatherForm.addEventListener("submit",  async event => {
+
+  event.preventDefault();
+
+  const city = cityInput.value;
+  const url ='https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric';
+  if(city){
+    try{
+      const weatherData = await getweatherData(cityWeather);
+      displayWeatherInfo(weathercurrentData);
+    }
+    catch{
+      console.log("error")
+      displayError("Error")
+    }
+
+  }
+  else{
+    displayError("please enter a city");
+  }
+});
+
+async function getWeatherData(city){
+  const url = 'https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric';
+  const responce = await fetch(apiurl);
+  console.log(responce);
+}
+
+function displayWeatherInfo(data){
+
+  const {name: city, main: {temp, feels_like, humidity}, weather:[{descripotion, id}]} = data;
+  card.comtent ="";
+  card.computedStyle.display = "flex";
+
+  const cityDisplay = document.createElement("h1");
+  const tempDisplay = document.createElement("p");
+  const Display = document.createElement("p");
+  const humidityDisplay = document.createElement("p");
+  const descDisplay = document.createElement("p");
+  const weatherEmoji = document.createElement("p");
+
+  cityDisplay.textContent = city;
+  tempDisplay.textContent = 'Temp: ${((temp - 275.15) * (9/5) + 32).toFixed(1)}°F';
+  humidityDisplay.textContent = 'Humidity: ${humidity}%';
+  descDisplay.textContent = description;
+  weatherEmoji.textContent = getweatherEmoji(id);
+
+
+  cityDisplay. classList.add("cityDisplay");
+  tempDisplay.classList.add("tempDisplay");
+  humidityDisplay.classList.add("humidityDisplay");
+  descDisplay.classList.add("descDisplay");
+  weatherEmoji.classList.add("weatherEmoji");
+
+  card.appendChild(cityDisplay);
+  card.appendChild(tempDisplay);
+  card.appendChild(humidityDisplay);
+  card.appendChild(humidityDisplay);
+  card.appendChild(descDisplay);
+  card.appendChild(weatherEmoji);
+}
+
+function getweatherEmoji(weatherId){
+
+  switch(true){
+    case (weatherId >= 200 && weatherId < 300):
+      return "thurderstorm";
+    case (weatherId >= 300 && weatherId < 400):
+      return "rainny";
+    case (weatherId >= 500 && weatherId < 600):
+      return "rainny";
+    case (weatherId >= 600 && weatherId < 700):
+      return "snowy";
+    case (weatherId >=700 && weatherId < 800):
+      return "sunny";
+      case (weatherId === 800):
+      return "clarity";
+      case (weatherId >= 801 && weatherId < 810):
+      return "cloudy";
+    default:
+      return "Data not found";
+  }
+}
+
+function displayError(message){
+
+}
+      </script>
+      </body>
+    </html>
