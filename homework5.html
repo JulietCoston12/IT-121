@@ -15,45 +15,48 @@
 <hr><div id="card_hand"></div>
 
 <script>
+  $(document).ready(function() {
+    // define a full deck of 52 cards
+    const suit =  ["Hearts", "diamonds", "clubs", "spade"];
+    const value = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    const deck = [];
 
-const dealHand = () => {
-  const value = ["Hearts, -3", "spades," -2, "diamonds," -1, "clubs 0"];
- const cards = document.querySelectorAll(".card");
-}
+    // function to shuffle the deck
+    const creatDeck = () => {
+      const deck = [];
+      for (let suit of suits) {
+        for (let value of values) {
+          deck.push({suit, value})
+          
+        }
+      }
+      };
 
-  let cards = ["Hearts",-3, "spades", -2, "diamonds", -1, "clubs" 0];
-document.getElementById("value"), innerHTML = value.toString();
-Math.floor(Math.random() * 52); 
-console.log(Hearts); // return array of cards in order
-console.log(Spades.lenght); // return number of cards in deck
-console.log(diamond.lenght[0]); // retun first card in deck
-console.log(suit[clubs.lenght -1]); // return last card in the deck
-console.log(cards[math.floor(math.random() * 52)]) // return random card in the deck
-  /* define Card object and deck of cards here */
-  for(var  cardsCounter = 0;   cardsCounter <  cards.length; suitsCounter ++) {
-   
+    // function to shuffle the deck
+    const shuffleDeck = () => {
+      deck.sort(() = math.random() - 0.5);
+      };
+
+    const dealHand = function(params) {
+      if (deck.length < 5) {
+        creatDeck();
+        shuffleDeck();
+      }
+      
     
-    
-    console.log( cards[ cardsCounter]); 
-  }
-  for(var valuesCounter = 13;  valuesCounter < values.length; valuesCounter ++) {)
+    let hand = deck.splice(0.5); // draw 5 cards from the deck correspounded to the hand
+      let handHTML = hand.map(card =>\ '${card.value} of ${card.suit}').join(("<br>");
+     $(#card_hand).html('<strong> this is your hand:</strong>br> ${handHTML}');
 
+      console.log(dealHand, hand); // return the hand
+      creatDeck();
+      shuffleDeck();
 
+      // create a button cliked evvent handler
+     $("#deal_button").click(dealHand);
 
-    console.log(cards[math.floor(math.random() * 52)]) // return random card in the deck
-
-
-    /* code to deal a card hand goes here 
-    
-     var Cards =  document. getElementById("Cards") innerHTML = listItems;
-    console.log('Cards')
-  
-
-    // update 'card_hand' DIV with appropriate information
-    $("#card_hand").html("Button clicked");
-
-    return false; // prevent page reload
-  }
+      
+        });
 
 </script>
 
